@@ -250,6 +250,7 @@ class Game(BaseGame):
         if army not in self.armies:
             self._logger.debug(
                 "Ignoring results for unknown army %s: %s %s reported by: %s", army, result_type, score, reporter)
+            self._logger.debug("Player options: {}".format(self._player_options))
             return
 
         if army not in self._results:
@@ -547,6 +548,7 @@ class Game(BaseGame):
         self._players_with_unsent_army_stats = list(self._players)
         self.state = GameState.LIVE
         self._logger.info("Game launched")
+        self._logger.debug("Player options: {}".format(self._player_options))
         await self.on_game_launched()
         await self.validate_game_settings()
 
