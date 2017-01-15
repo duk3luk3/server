@@ -248,8 +248,7 @@ class Game(BaseGame):
         :return:
         """
         if army not in self.armies:
-            self._logger.debug(
-                "Ignoring results for unknown army %s: %s %s reported by: %s", army, result_type, score, reporter)
+            self._logger.info("%s reported result for army %s: %s %s - IGNORED: Unknown army", reporter, army, result_type, score)
             self._logger.debug("Player options: {}".format(self._player_options))
             return
 
@@ -456,6 +455,7 @@ class Game(BaseGame):
         if id not in self._player_options:
             self._player_options[id] = {}
         self._player_options[id][key] = value
+        self._logger.info("Set Player Option: PlayerID: {}; Option: {}; Value: {}".format(id, key, value))
 
     def get_player_option(self, id, key):
         """
